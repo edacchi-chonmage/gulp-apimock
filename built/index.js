@@ -4,10 +4,6 @@ var _lodashNode = require('lodash-node');
 
 var _lodashNode2 = _interopRequireDefault(_lodashNode);
 
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
 var _through = require('through2');
 
 var _through2 = _interopRequireDefault(_through);
@@ -142,7 +138,6 @@ function mocks() {
 mocks.rerun = function () {
   server.close();
   server.listen(3000);
-  console.log('test');
 };
 
 module.exports = mocks;

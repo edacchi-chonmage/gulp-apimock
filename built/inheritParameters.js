@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (actualParameters, inheritingParameters) {
   _lodashNode2.default.forEach(inheritingParameters, function (value, key) {
-    if (actualParameters[name] == undefined) {
-      actualParameters[name] = params;
+    if (actualParameters[key] == undefined) {
+      actualParameters[key] = value;
     }
   });
 
