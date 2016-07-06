@@ -1,5 +1,4 @@
 import _ from 'lodash-node';
-import fs from 'fs';
 import through from 'through2';
 import path from 'path';
 import protagonist from 'protagonist';
