@@ -128,6 +128,34 @@ compile.buildString = function  (min, max, dataFilter) {
 compile.buildBoolean = function  () {
   return Boolean(_.random(0, 1));
 }
+compile.buildNumberRange = function (lenMin, lenMax) {
+  var numberRange = [];
+
+  for (var i = lenMin; i <= lenMax; i++) {
+    numberRange.push(i);
+  }
+
+  return numberRange;
+};
+compile.buildRandomArray = function (dataFilter) {
+  var targetStrings = dataFilter.split(',');
+  var stringsLength = targetStrings.length;
+
+  for (var i = stringsLength - 1; i >= 0; i--) {
+    var isRemove = Boolean(Math.round(Math.random()));
+
+    if (isRemove) {
+      targetStrings.splice(i, 1);
+    }
+  }
+
+  return targetStrings;
+};
+compile.buildRandomValue = function (dataFilter) {
+  var targetStrings = dataFilter.split(',');
+
+  return targetStrings[Math.floor(Math.random() * targetStrings.length)];
+};
 compile.buildNumber = function  (min, max, dataFilter) {
     if (min && !max) {
         max = min;
@@ -207,6 +235,15 @@ compile.buildByVal = function (str) {
             break;
         case 'Boolean':
             return compile.buildBoolean();
+            break;
+        case 'NumberRange':
+            return compile.buildNumberRange(lenMin, lenMax);
+            break;
+        case 'RandomValue':
+            return compile.buildRandomValue(dataFilter);
+            break;
+        case 'RandomArray':
+            return compile.buildRandomArray(dataFilter);
             break;
     }
 
