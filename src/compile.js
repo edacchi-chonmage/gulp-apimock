@@ -7,18 +7,23 @@ var plen = paragraph.length;
 function compileObj (obj) {
     var item = null;
     var result = {};
-    _.forOwn(obj, function (val, key) {
-        if (~key.indexOf(':') || ~key.indexOf('|')) {
-            item = compile.buildByKey(key, val);
-            result[item[0]] = item[1];
-        } else {
-            if (_.isObject(val)) {
-                result[key] = compile(val);
-            } else {
-                result[key] = compile.buildByVal(val);
-            }
-        }
-    });
+
+    if (!_.isObject(obj)) {
+      return compile.buildByVal(obj);
+    } else {
+      _.forOwn(obj, function (val, key) {
+          if (~key.indexOf(':') || ~key.indexOf('|')) {
+              item = compile.buildByKey(key, val);
+              result[item[0]] = item[1];
+          } else {
+              if (_.isObject(val)) {
+                  result[key] = compile(val);
+              } else {
+                  result[key] = compile.buildByVal(val);
+              }
+          }
+      });
+    }
 
     return result;
 }
@@ -138,7 +143,7 @@ compile.buildNumberRange = function (lenMin, lenMax) {
   return numberRange;
 };
 compile.buildRandomArray = function (dataFilter) {
-  var targetStrings = dataFilter.split(',');
+  var targetStrings = dataFilter.split('%,');
   var stringsLength = targetStrings.length;
 
   for (var i = stringsLength - 1; i >= 0; i--) {
@@ -152,7 +157,7 @@ compile.buildRandomArray = function (dataFilter) {
   return targetStrings;
 };
 compile.buildRandomValue = function (dataFilter) {
-  var targetStrings = dataFilter.split(',');
+  var targetStrings = dataFilter.split('%,');
 
   return targetStrings[Math.floor(Math.random() * targetStrings.length)];
 };
