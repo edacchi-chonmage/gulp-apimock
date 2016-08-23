@@ -16,6 +16,10 @@ var _protagonist = require('protagonist');
 
 var _protagonist2 = _interopRequireDefault(_protagonist);
 
+var _corser = require('corser');
+
+var _corser2 = _interopRequireDefault(_corser);
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -45,6 +49,7 @@ function mocks() {
   return _through2.default.obj(function (file, enc, cb) {
     var text = file.contents.toString();
     app = (0, _express2.default)();
+    app.use(_corser2.default.create());
 
     var sendResponse = function sendResponse(responses) {
       return function (req, res) {

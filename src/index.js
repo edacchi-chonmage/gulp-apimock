@@ -2,6 +2,7 @@ import _ from 'lodash-node';
 import through from 'through2';
 import path from 'path';
 import protagonist from 'protagonist';
+import corser from 'corser';
 import express from 'express';
 import compile from './compile.js';
 import inheritHeaders from './inheritHeaders.js';
@@ -15,6 +16,7 @@ function mocks () {
   return through.obj((file, enc, cb) => {
     let text = file.contents.toString();
     app = express();
+    app.use(corser.create());
 
     let sendResponse = (responses) => {
       return (req, res) => {
