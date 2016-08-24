@@ -13,9 +13,17 @@ function compileObj (obj) {
     } else {
       _.forOwn(obj, function (val, key) {
           if (~key.indexOf(':') || ~key.indexOf('|')) {
-              item = compile.buildByKey(key, val);
-              result[item[0]] = item[1];
+              if (/\|Nullable$/.test(key) && Math.round(Math.random())) {
+                result[key.replace(/\|Nullable$/, '')] = null;
+              } else {
+                key = key.replace(/\|Nullable$/, '');
+
+                item = compile.buildByKey(key, val);
+                result[item[0]] = item[1];
+              }
           } else {
+              key = key.replace(/\|Nullable$/, '');
+
               if (_.isObject(val)) {
                   result[key] = compile(val);
               } else {

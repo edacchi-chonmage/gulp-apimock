@@ -14,11 +14,11 @@ Sample of list
 
 - Response 200 (application/json)
   {
-    "list": [
+    "list|Nullable": [
       {
         "id": "Number:1-4",
         "name": "String:10-20",
-        "number": "Number:0-3",
+        "number|Nullable": "Number:0-3",
         "date": "Date|ISO",
         "numberRange": "NumberRange:1970-1989",
         "randomValue": "RandomValue|foo,bar,buz",
